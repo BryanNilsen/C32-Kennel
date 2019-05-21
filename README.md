@@ -1,4 +1,4 @@
-#KENNEL - A React Application
+# KENNEL - A React Application
 
 Kennel is based on a fictitious animal boarding business. The business serves two locations, operates with several employees, boards many animals. This application seeks to represent all of this data as well as provide affordances for adding, removing, and updating the relative information.
 
