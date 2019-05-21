@@ -22,6 +22,11 @@ class NavBar extends Component {
               Employees
             </Link>
           </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/owners">
+              Owners
+            </Link>
+          </li>
         </ul>
       </nav>
     );
