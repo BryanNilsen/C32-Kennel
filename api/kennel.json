@@ -1,0 +1,115 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "Jessica Younker"
+    },
+    {
+      "id": 2,
+      "name": "Jordan Nelson"
+    },
+    {
+      "id": 3,
+      "name": "Zoe LeBlanc"
+    },
+    {
+      "id": 4,
+      "name": "Blaise Roberts"
+    }
+  ],
+  "locations": [
+    {
+      "id": 1,
+      "name": "Nashville North",
+      "address": "500 Circle Way"
+    },
+    {
+      "id": 2,
+      "name": "Nashville South",
+      "address": "10101 Binary Court"
+    }
+  ],
+  "animals": [
+    {
+      "id": 1,
+      "name": "Chewbarka"
+    },
+    {
+      "id": 2,
+      "name": "Bob Barker"
+    },
+    {
+      "id": 3,
+      "name": "Mr. Furrley"
+    },
+    {
+      "id": 4,
+      "name": "Steven"
+    },
+    {
+      "id": 5,
+      "name": "Doggie Howser"
+    },
+    {
+      "id": 6,
+      "name": "Fuzzball"
+    },
+    {
+      "id": 7,
+      "name": "Arnold"
+    },
+    {
+      "id": 8,
+      "name": "Sniffles"
+    }
+  ],
+  "owners": [
+    {
+      "id": 1,
+      "name": "Ryan Tanay",
+      "phone": "615-373-1234"
+    },
+    {
+      "id": 2,
+      "name": "Emma Beaton",
+      "phone": "615-455-4551"
+    },
+    {
+      "id": 3,
+      "name": "Dani Adkins",
+      "phone": "615-373-8894"
+    },
+    {
+      "id": 4,
+      "name": "Adam Oswalt",
+      "phone": "718-956-3501"
+    },
+    {
+      "id": 5,
+      "name": "Fletcher Bangs",
+      "phone": "252-364-7503"
+    },
+    {
+      "id": 6,
+      "name": "Angela Lee",
+      "phone": "516-281-3946"
+    }
+  ],
+  "animalOwners": [
+    {
+      "id": 1,
+      "animalId": 1,
+      "ownerId": 1
+    },
+    {
+      "id": 2,
+      "animalId": 1,
+      "ownerId": 2
+    },
+    {
+      "id": 3,
+      "animalId": 2,
+      "ownerId": 3
+    }
+  ]
+}
