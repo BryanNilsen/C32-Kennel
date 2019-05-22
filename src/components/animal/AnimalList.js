@@ -14,7 +14,7 @@ class AnimalList extends Component {
 
   printAnimal() {
     return this.props.animals.map(animal => (
-      <div key={animal.id}>
+      <div key={animal.id} className="result_card">
         <h2>{animal.name}</h2>
         <p>Owned by:</p>
         <ul>

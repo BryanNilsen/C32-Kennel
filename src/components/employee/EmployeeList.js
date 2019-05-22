@@ -6,7 +6,9 @@ class EmployeeList extends Component {
       <section className="employees">
         <h1 className="page_title">Employees</h1>
         {this.props.employees.map(employee => (
-          <div key={employee.id}>{employee.name}</div>
+          <div key={employee.id} className="result_card">
+            {employee.name}
+          </div>
         ))}
       </section>
     );

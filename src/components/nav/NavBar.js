@@ -43,7 +43,7 @@ class NavBar extends Component {
             <div className="input-group input-group-sm mb-2 mt-1 ml-4">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="inputGroup-sizing-sm">
-                  Search
+                  <Link to="/search">Search</Link>
                 </span>
               </div>
               <input

@@ -15,7 +15,9 @@ export default {
       }
     }).then(e => e.json());
   },
-  search(input) {
-    return fetch(`${remoteURL}/animals?name_like=${input}`).then(e => e.json());
+  search(resource, input) {
+    return fetch(`${remoteURL}/${resource}?name_like=${input}`).then(e =>
+      e.json()
+    );
   }
 };

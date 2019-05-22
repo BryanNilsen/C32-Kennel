@@ -14,10 +14,16 @@ class Kennel extends Component {
 
   getSearchResults = input => {
     console.log("GETSEARCH INPUT:", input);
-    APIManager.search(input).then(results => {
-      this.setState({ searchResults: results });
-      console.log("SEARCH RESULTS", results);
-    });
+    let newSearchResults = [];
+    APIManager.search("animals", input)
+      .then(results => (newSearchResults = results))
+      .then(() => APIManager.search("employees", input))
+      .then(results => results.forEach(result => newSearchResults.push(result)))
+      .then(() => APIManager.search("owners", input))
+      .then(results => results.forEach(result => newSearchResults.push(result)))
+      .then(() => APIManager.search("locations", input))
+      .then(results => results.forEach(result => newSearchResults.push(result)))
+      .then(() => this.setState({ searchResults: newSearchResults }));
   };
 
   render() {
