@@ -4,3 +4,13 @@
   justify-content: space-around;
   flex-direction: row;
 }
+
+.result_card {
+  border: 1px solid cornflowerblue;
+  margin: 20px;
+  padding: 20px;
+}
+
+.page_title {
+  margin-top: 20px
+}

@@ -4,55 +4,53 @@ import AnimalList from "./animal/AnimalList";
 import LocationList from "./location/LocationList";
 import EmployeeList from "./employee/EmployeeList";
 import OwnerList from "./owner/OwnerList";
+import SearchResults from "./search/SearchResults";
+import APIManager from "../modules/APIManager";
 
 class ApplicationViews extends Component {
-  employeesFromAPI = [
-    { id: 1, name: "Jessica Younker" },
-    { id: 2, name: "Jordan Nelson" },
-    { id: 3, name: "Zoe LeBlanc" },
-    { id: 4, name: "Blaise Roberts" }
-  ];
-
-  locationsFromAPI = [
-    { id: 1, name: "Nashville North", address: "500 Circle Way" },
-    { id: 2, name: "Nashville South", address: "10101 Binary Court" }
-  ];
-
-  animalsFromAPI = [
-    { id: 1, name: "Chewie" },
-    { id: 2, name: "Bob Barker" },
-    { id: 3, name: "Mr. Furrley" },
-    { id: 4, name: "Steven" },
-    { id: 5, name: "Squirrelchaser 3000" }
-  ];
-
-  ownersFromAPI = [
-    { id: 1, name: "Ryan Tanay", phone: "615-373-1234" },
-    { id: 2, name: "Emma Beaton", phone: "615-455-4551" },
-    { id: 3, name: "Dani Adkins", phone: "615-373-8894" },
-    { id: 4, name: "Adam Oswalt", phone: "718-956-3501" },
-    { id: 5, name: "Fletcher Bangs", phone: "252-364-7503" },
-    { id: 6, name: "Angela Lee", phone: "516-281-3946" }
-  ];
-
-  animalOwners = [
-    { id: 1, animalId: 1, ownerId: 1 },
-    { id: 2, animalId: 1, ownerId: 2 },
-    { id: 3, animalId: 2, ownerId: 3 },
-    { id: 4, animalId: 3, ownerId: 4 },
-    { id: 5, animalId: 4, ownerId: 5 },
-    { id: 6, animalId: 4, ownerId: 2 }
-  ];
-
   state = {
-    animalOwners: this.animalOwners,
-    owners: this.ownersFromAPI,
-    employees: this.employeesFromAPI,
-    locations: this.locationsFromAPI,
-    animals: this.animalsFromAPI
+    animalOwners: [],
+    owners: [],
+    employees: [],
+    locations: [],
+    animals: []
+  };
+
+  componentDidMount() {
+    console.log("APP VIEWS Component Did Mount");
+
+    APIManager.getAll("animalOwners").then(ao =>
+      this.setState({ animalOwners: ao })
+    );
+
+    APIManager.getAll("owners").then(owners =>
+      this.setState({ owners: owners })
+    );
+
+    APIManager.getAll("employees").then(employees =>
+      this.setState({ employees: employees })
+    );
+
+    APIManager.getAll("locations").then(locations =>
+      this.setState({ locations: locations })
+    );
+
+    APIManager.getAll("animals").then(animals =>
+      this.setState({ animals: animals })
+    );
+  }
+
+  deleteAnimal = id => {
+    APIManager.delete("animals", id)
+      .then(() => APIManager.getAll("animals"))
+      .then(items => {
+        console.log(items);
+        this.setState({ animals: items });
+      });
   };
 
   render() {
+    console.log("APP VIEWS Render");
     return (
       <React.Fragment>
         <Route
@@ -70,6 +68,7 @@ class ApplicationViews extends Component {
                 animals={this.state.animals}
                 owners={this.state.owners}
                 animalOwners={this.state.animalOwners}
+                deleteAnimal={this.deleteAnimal}
               />
             );
           }}
@@ -84,6 +83,12 @@ class ApplicationViews extends Component {
           path="/owners"
           render={props => {
             return <OwnerList owners={this.state.owners} />;
+          }}
+        />
+        <Route
+          path="/search"
+          render={props => {
+            return <SearchResults searchResults={this.props.searchResults} />;
           }}
         />
       </React.Fragment>
