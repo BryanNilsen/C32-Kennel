@@ -1,6 +1,10 @@
 {
   "employees": [
     {
+      "id": 0,
+      "name": "Unassigned"
+    },
+    {
       "id": 13,
       "name": "Jessica Younker"
     },
@@ -32,35 +36,40 @@
   "animals": [
     {
       "id": 1,
-      "name": "Chewbarka"
+      "name": "Chewbarka",
+      "breed": "",
+      "employeeId": 4
     },
     {
       "id": 2,
-      "name": "Bob Barker"
+      "name": "Bob Barker",
+      "employeeId": 3
     },
     {
       "id": 3,
-      "name": "Mr. Furrley"
-    },
-    {
-      "id": 4,
-      "name": "Steven"
+      "name": "Mr. Furrley",
+      "employeeId": 2
     },
     {
       "id": 5,
-      "name": "Doggie Howser"
+      "name": "Doggie Howser",
+      "employeeId": 0
     },
     {
       "id": 6,
-      "name": "Fuzzball"
+      "name": "Fuzzball",
+      "employeeId": 0
     },
     {
       "id": 7,
-      "name": "Arnold"
+      "name": "Arnold",
+      "employeeId": 2
     },
     {
       "id": 8,
-      "name": "Sniffles"
+      "name": "Sniffles",
+      "breed": "german shepherd",
+      "employeeId": 2
     }
   ],
   "owners": [
@@ -120,11 +129,6 @@
       "id": 4,
       "animalId": 3,
       "ownerId": 4
-    },
-    {
-      "id": 5,
-      "animalId": 4,
-      "ownerId": 5
     },
     {
       "id": 6,

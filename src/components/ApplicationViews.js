@@ -1,6 +1,10 @@
 import { Route } from "react-router-dom";
+import { withRouter } from "react-router";
 import React, { Component } from "react";
 import AnimalList from "./animal/AnimalList";
+import AnimalForm from "./animal/AnimalForm";
+import AnimalDetail from "./animal/AnimalDetail";
+import AnimalEditForm from "./animal/AnimalEditForm";
 import LocationList from "./location/LocationList";
 import EmployeeList from "./employee/EmployeeList";
 import OwnerList from "./owner/OwnerList";
@@ -46,11 +50,30 @@ class ApplicationViews extends Component {
       .then(items => {
         console.log(items);
         this.setState({ animals: items });
+        this.props.history.push("/animals");
+      });
+  };
+
+  addAnimal = animal =>
+    APIManager.post(animal)
+      .then(() => APIManager.getAll("animals"))
+      .then(animals =>
+        this.setState({
+          animals: animals
+        })
+      );
+
+  updateAnimal = editedAnimalObject => {
+    return APIManager.put(editedAnimalObject)
+      .then(() => APIManager.getAll("animals"))
+      .then(animals => {
+        this.setState({
+          animals: animals
+        });
       });
   };
 
   render() {
-    console.log("APP VIEWS Render");
     return (
       <React.Fragment>
         <Route
@@ -61,14 +84,64 @@ class ApplicationViews extends Component {
           }}
         />
         <Route
+          exact
           path="/animals"
           render={props => {
             return (
               <AnimalList
+                {...props}
                 animals={this.state.animals}
                 owners={this.state.owners}
                 animalOwners={this.state.animalOwners}
                 deleteAnimal={this.deleteAnimal}
+              />
+            );
+          }}
+        />
+        <Route
+          path="/animals/new"
+          render={props => {
+            return (
+              <AnimalForm
+                {...props}
+                addAnimal={this.addAnimal}
+                employees={this.state.employees}
+              />
+            );
+          }}
+        />
+        <Route
+          exact
+          path="/animals/:animalId(\d+)"
+          render={props => {
+            // Find the animal with the id of the route parameter
+            let animal = this.state.animals.find(
+              animal => animal.id === parseInt(props.match.params.animalId)
+            );
+
+            // If the animal wasn't found, create a default one
+            if (!animal) {
+              animal = { id: 404, name: "404", breed: "Dog not found" };
+            }
+
+            return (
+              <AnimalDetail
+                {...props}
+                animals={this.state.animals}
+                animal={animal}
+                deleteAnimal={this.deleteAnimal}
+              />
+            );
+          }}
+        />
+        <Route
+          path="/animals/:animalId(\d+)/edit"
+          render={props => {
+            return (
+              <AnimalEditForm
+                {...props}
+                employees={this.state.employees}
+                updateAnimal={this.updateAnimal}
               />
             );
           }}
@@ -88,7 +161,14 @@ class ApplicationViews extends Component {
         <Route
           path="/search"
           render={props => {
-            return <SearchResults searchResults={this.props.searchResults} />;
+            return (
+              <SearchResults
+                {...props}
+                {...this.props}
+                // searchResults={this.props.searchResults}
+                // searchInput={this.props.searchInput}
+              />
+            );
           }}
         />
       </React.Fragment>
@@ -96,4 +176,4 @@ class ApplicationViews extends Component {
   }
 }
 
-export default ApplicationViews;
+export default withRouter(ApplicationViews);

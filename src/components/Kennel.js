@@ -9,14 +9,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 class Kennel extends Component {
   state = {
-    searchResults: []
+    searchResults: [],
+    searchInput: ""
   };
 
   getSearchResults = input => {
-    console.log("GETSEARCH INPUT:", input);
+    // console.log("GETSEARCH INPUT:", input);
+    this.setState({ searchInput: input });
     let newSearchResults = [];
     APIManager.search("animals", input)
       .then(results => (newSearchResults = results))
+      //  * include search across all sections below
       .then(() => APIManager.search("employees", input))
       .then(results => results.forEach(result => newSearchResults.push(result)))
       .then(() => APIManager.search("owners", input))
@@ -29,12 +32,12 @@ class Kennel extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavBar
-          getSearchResults={this.getSearchResults}
+        <NavBar getSearchResults={this.getSearchResults} />
+        <ApplicationViews
           searchResults={this.state.searchResults}
+          searchInput={this.state.searchInput}
         />
-        <ApplicationViews searchResults={this.state.searchResults} />
-        <Footer />
+        {/* <Footer /> */}
       </React.Fragment>
     );
   }

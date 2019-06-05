@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class AnimalList extends Component {
   findOwners(animal) {
@@ -30,6 +31,16 @@ class AnimalList extends Component {
             )
           )}
         </ul>
+        <Link to={`/animals/${animal.id}`}>Details</Link>
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => {
+            this.props.history.push(`/animals/${animal.id}/edit`);
+          }}
+        >
+          Edit
+        </button>
         <button onClick={() => this.props.deleteAnimal(animal.id)}>
           DELETE
         </button>
@@ -38,13 +49,24 @@ class AnimalList extends Component {
   }
 
   render() {
-    this.props.animals.map(animal => console.log(this.findOwners(animal)));
-
     return (
-      <section className="animals">
-        <h1 className="page_title">Animals</h1>
-        {this.printAnimal()}
-      </section>
+      <React.Fragment>
+        <div className="animalButton">
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={() => {
+              this.props.history.push("/animals/new");
+            }}
+          >
+            Admit Animal
+          </button>
+        </div>
+        <section className="animals">
+          <h1 className="page_title">Animals</h1>
+          {this.printAnimal()}
+        </section>
+      </React.Fragment>
     );
   }
 }

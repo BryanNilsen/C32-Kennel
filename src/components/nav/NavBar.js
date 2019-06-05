@@ -1,16 +1,16 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class NavBar extends Component {
-  // constuctor() {
-  //   this.handleSearch = this.handleSearch.bind(this);
-  // }
   handleSearch(input) {
+    console.log(input.target.value);
+    // only search on enter/return keypress
     if (input.keyCode === 13) {
       console.log("HANDLE SEARCH - INPUT TARGET VALUE:", input.target.value);
       this.props.getSearchResults(input.target.value);
-      // this.props.history.push("/search");
+      this.props.history.push("/search");
     }
   }
 
@@ -61,4 +61,4 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);
